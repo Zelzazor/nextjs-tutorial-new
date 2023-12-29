@@ -4,9 +4,10 @@ import {
   CustomersTableType,
   InvoiceForm,
   InvoicesTable,
+  LatestInvoice,
   LatestInvoiceRaw,
-  User,
   Revenue,
+  User,
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -32,7 +33,7 @@ export async function fetchRevenue() {
   }
 }
 
-export async function fetchLatestInvoices() {
+export async function fetchLatestInvoices(): Promise<LatestInvoice[]> {
   try {
     const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
